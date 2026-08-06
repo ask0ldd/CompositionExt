@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type GridType = "thirds" | "phi";
 
 export function Overlay() {
-  const [enabled, setEnabled] = useState(true);
-  const [gridType, setGridType] = useState<GridType>("thirds");
+  // const [enabled, setEnabled] = useState(true);
+  const [gridType ] = useState<GridType>("thirds");
 
-  useEffect(() => {
+  /*useEffect(() => {
     chrome.storage.sync.get(["gridEnabled", "gridType"], (result) => {
       if (typeof result.gridEnabled === "boolean") setEnabled(result.gridEnabled);
       if (result.gridType === "thirds" || result.gridType === "phi") {
@@ -23,12 +23,14 @@ export function Overlay() {
     return () => chrome.storage.onChanged.removeListener(listener);
   }, []);
 
-  if (!enabled) return null;
+  if (!enabled) return null;*/
 
   const lines =
     gridType === "thirds"
       ? [33.3333, 66.6667]
       : [38.2, 61.8];
+
+  const opacity = 0.3;
 
   return (
     <div
@@ -39,30 +41,30 @@ export function Overlay() {
         backgroundImage: `
           linear-gradient(to right,
             transparent calc(${lines[0]}% - 1px),
-            rgba(255, 0, 0, 0.75) calc(${lines[0]}% - 1px),
-            rgba(255, 0, 0, 0.75) calc(${lines[0]}% + 1px),
+            rgba(255, 0, 0, ${opacity}) calc(${lines[0]}% - 1px),
+            rgba(255, 0, 0, ${opacity}) calc(${lines[0]}% + 1px),
             transparent calc(${lines[0]}% + 1px)
           ),
           linear-gradient(to right,
             transparent calc(${lines[1]}% - 1px),
-            rgba(255, 0, 0, 0.75) calc(${lines[1]}% - 1px),
-            rgba(255, 0, 0, 0.75) calc(${lines[1]}% + 1px),
+            rgba(255, 0, 0, ${opacity}) calc(${lines[1]}% - 1px),
+            rgba(255, 0, 0, ${opacity}) calc(${lines[1]}% + 1px),
             transparent calc(${lines[1]}% + 1px)
           ),
           linear-gradient(to bottom,
             transparent calc(${lines[0]}% - 1px),
-            rgba(255, 0, 0, 0.75) calc(${lines[0]}% - 1px),
-            rgba(255, 0, 0, 0.75) calc(${lines[0]}% + 1px),
+            rgba(255, 0, 0, ${opacity}) calc(${lines[0]}% - 1px),
+            rgba(255, 0, 0, ${opacity}) calc(${lines[0]}% + 1px),
             transparent calc(${lines[0]}% + 1px)
           ),
           linear-gradient(to bottom,
             transparent calc(${lines[1]}% - 1px),
-            rgba(255, 0, 0, 0.75) calc(${lines[1]}% - 1px),
-            rgba(255, 0, 0, 0.75) calc(${lines[1]}% + 1px),
+            rgba(255, 0, 0, ${opacity}) calc(${lines[1]}% - 1px),
+            rgba(255, 0, 0, ${opacity}) calc(${lines[1]}% + 1px),
             transparent calc(${lines[1]}% + 1px)
           )
         `,
       }}
-    />
+    >TEST</div>
   );
 }

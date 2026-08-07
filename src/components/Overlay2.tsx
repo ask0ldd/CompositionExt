@@ -26,14 +26,26 @@ export function Overlay2() {
         const onKeyDown = (e: KeyboardEvent) => {
           // ignore when focus is in an input/textarea
           if ((e.target as HTMLElement)?.tagName === 'INPUT' || (e.target as HTMLElement)?.tagName === 'TEXTAREA') return; 
-          if (e.code === 'KeyG') {
-            // advance to next grid type
-            setGridType((prev) => {
-            const idx = gridTypes.indexOf(prev);
-            const next = gridTypes[(idx + 1) % gridTypes.length];
-            // optionally persist to storage here
-            return next;
-            });
+
+          switch(e.code){
+            case "KeyH" :
+              // advance to next grid type
+              setGridType((prev) => {
+                const idx = gridTypes.indexOf(prev);
+                const next = gridTypes[(idx + 1) % gridTypes.length];
+                // optionally persist to storage here
+                return next;
+              });
+            break;
+            case "KeyG" :
+              // advance to next grid type
+              setGridType((prev) => {
+                const idx = gridTypes.indexOf(prev);
+                const next = gridTypes[(idx - 1) % gridTypes.length];
+                // optionally persist to storage here
+                return next;
+              });
+            break;
           }
         };
         window.addEventListener('keydown', onKeyDown);

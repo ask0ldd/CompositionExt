@@ -65,6 +65,6 @@ export function Overlay() {
           )
         `,
       }}
-    >TEST</div>
+    />
   );
 }
